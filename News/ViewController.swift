@@ -21,11 +21,9 @@ class ViewController: UIViewController {
     var articleGetter = BitcoinNewsReader()
     var newsView = NewsView()
 
-
     override func loadView() {
         self.view = newsView
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +35,11 @@ class ViewController: UIViewController {
         self.newsView.tableView.dataSource = self
         self.newsView.setupTableView()
 
-
         articleGetter.getResponse { [weak self] response in
             self?.articles = response?.articles ?? []
             self?.newsView.tableView.reloadData()
         }
     }
-
-
 }
 
 

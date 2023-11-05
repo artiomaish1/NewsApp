@@ -75,7 +75,7 @@ class NewsView: UITableViewCell, NewsViewDownloadable {
         ])
     }
     
-    func setupTableView(){
+    func setupTableView() {
         self.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.register(NewsView.self, forCellReuseIdentifier: "NewsView")

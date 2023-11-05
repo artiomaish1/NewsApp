@@ -14,7 +14,7 @@ struct Article: Codable {
     let title: String?
     let description: String?
     let urlToImage: String?
-    
+
 }
 
 struct Response: Codable {
@@ -26,9 +26,9 @@ struct Response: Codable {
 }
 
 class BitcoinNewsReader: ResponseInteractive {
-    
+
     private let newsURL = URL(string: "https://newsapi.org/v2/everything?q=bitcoin&apiKey=a6f788672a2940e9aca923ca6de8798a")
-    
+
     func getResponse(completion: @escaping (Response?) -> Void) {
         if let unwrappedURL = newsURL {
             let request = URLRequest(url: unwrappedURL)
