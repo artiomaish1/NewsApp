@@ -1,24 +1,31 @@
 import UIKit
 
-
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    let dataModel = ["Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey","Cat", "Dog", "Fish", "Monkey"]
-
+extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataModel.count
+        articles.count
     }
-    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = dataModel[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsView", for: indexPath) as? NewsView
+        else { fatalError() }
+
+        cell.configure(article: articles[indexPath.row])
 
         return cell
     }
+}
+
+class ViewController: UIViewController {
+
+    var articles: [Article] = []
+    var articleGetter = BitcoinNewsReader()
+    var newsView = NewsView()
 
 
-    var tableView = UITableView()
+    override func loadView() {
+        self.view = newsView
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +34,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.backgroundColor = .white
 
-        tableView = UITableView(frame: self.view.bounds, style: .plain)
-        tableView.backgroundColor = .white
-        tableView.showsVerticalScrollIndicator = false
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.newsView.tableView.dataSource = self
+        self.newsView.setupTableView()
 
-        self.view.addSubview(tableView)
 
+        articleGetter.getResponse { [weak self] response in
+            self?.articles = response?.articles ?? []
+            self?.newsView.tableView.reloadData()
+        }
     }
 
+
 }
+
 
