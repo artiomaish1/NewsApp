@@ -38,11 +38,9 @@ class NewsArticleTableViewCell: UITableViewCell {
         self.setupCell()
     }
 
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 
     private func setupCell() {
         contentView.backgroundColor = .white
@@ -63,11 +61,11 @@ class NewsArticleTableViewCell: UITableViewCell {
             newsDescription.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 8),
             newsDescription.leadingAnchor.constraint(equalTo: newsImage.trailingAnchor, constant: 16),
             newsDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            newsDescription.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            newsDescription.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 
-    func configure(with article: Article, imageDownloadHandler: @escaping (URL?) -> ()) {
+    func configure(with article: Article, imageDownloadHandler: @escaping (URL?) -> Void) {
         newsTitle.text = article.title
         newsDescription.text = article.description
         if let urlToImage = article.urlToImage, let url = URL(string: urlToImage) {

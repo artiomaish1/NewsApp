@@ -25,4 +25,3 @@ class NewsListPresenter: NewsListPresenterProtocol {
         model.downloadImage(url: url, completion: completion)
     }
 }
-

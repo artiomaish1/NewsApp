@@ -5,4 +5,3 @@ struct Article: Codable {
     let description: String?
     let urlToImage: String?
 }
-

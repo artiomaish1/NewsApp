@@ -10,7 +10,8 @@ extension NewsListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as? NewsArticleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell",
+                                                       for: indexPath) as? NewsArticleTableViewCell else {
             fatalError("Unable to dequeue")
         }
         let article = articles[indexPath.row]
@@ -26,7 +27,6 @@ extension NewsListViewController: UITableViewDataSource {
         return cell
     }
 }
-
 
 class NewsListViewController: UIViewController, NewsListViewProtocol {
     var presenter: NewsListPresenterProtocol?
