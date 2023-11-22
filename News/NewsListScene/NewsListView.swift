@@ -37,7 +37,7 @@ class NewsListViewController: UIViewController, NewsListViewProtocol {
         return tableView
     }()
 
-    private var articles: [Article] = [] {      // что это и зачем
+    private var articles: [Article] = [] {      
         didSet {
             tableView.reloadData()
         }

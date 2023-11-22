@@ -3,7 +3,7 @@ import UIKit
 
 protocol NewsListModel {
     var newsURL: URL? { get set }
-    func getNews(completion: @escaping (Response?) -> Void) // () = Void, разницы нету, но так меньше символов :-)
+    func getNews(completion: @escaping (Response?) -> Void)
     func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void)
 }
 
